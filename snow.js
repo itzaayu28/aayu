@@ -1,10 +1,21 @@
 // Optimized Falling Snow Effect
 (function () {
     const canvas = document.getElementById('snow-canvas');
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true }); // Optimize for alpha
 
     let snowflakes = [];
     let animationId;
+
+    // Pre-render snowflake to improve performance
+    const snowflakeCanvas = document.createElement('canvas');
+    const snowflakeCtx = snowflakeCanvas.getContext('2d');
+    snowflakeCanvas.width = 20;
+    snowflakeCanvas.height = 20;
+    snowflakeCtx.font = '20px Arial';
+    snowflakeCtx.fillStyle = '#FFFFFF';
+    snowflakeCtx.textAlign = 'center';
+    snowflakeCtx.textBaseline = 'middle';
+    snowflakeCtx.fillText('❄', 10, 10);
 
     // Set canvas size
     function resizeCanvas() {
@@ -21,18 +32,17 @@
         reset() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * -canvas.height;
-            this.size = Math.random() * 10 + 10; // Font size 10-20px (smaller)
-            this.speed = Math.random() * 1.5 + 1; // Faster speed (1-2.5)
-            this.opacity = Math.random() * 0.4 + 0.6; // 0.6-1
-            this.drift = (Math.random() - 0.5) * 0.5; // Gentle horizontal drift
+            this.size = Math.random() * 10 + 10; // 10-20px
+            this.scale = this.size / 20; // Scale based on base size
+            this.speed = Math.random() * 1.5 + 1;
+            this.opacity = Math.random() * 0.4 + 0.6;
+            this.drift = (Math.random() - 0.5) * 0.5;
         }
 
         update() {
-            // Simple vertical fall with gentle drift
             this.y += this.speed;
             this.x += this.drift;
 
-            // Reset if off screen
             if (this.y > canvas.height + 20) {
                 this.reset();
             }
@@ -45,24 +55,27 @@
         }
 
         draw() {
-            ctx.save();
-            ctx.font = `${this.size}px Arial`;
             ctx.globalAlpha = this.opacity;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillText('❄', this.x, this.y);
-            ctx.restore();
+            // Draw image is faster than fillText
+            ctx.drawImage(
+                snowflakeCanvas,
+                this.x - this.size / 2,
+                this.y - this.size / 2,
+                this.size,
+                this.size
+            );
         }
     }
 
-    // Initialize snowflakes (reduced count)
+    // Initialize snowflakes
     function initSnow() {
         snowflakes = [];
-        // Fewer snowflakes for better performance
-        const snowflakeCount = Math.floor((canvas.width * canvas.height) / 100000);
+        // Cap max snowflakes for mobile performance
+        let count = Math.floor((canvas.width * canvas.height) / 50000); // Increased density slightly but...
+        if (count > 50) count = 50; // Hard cap
+        if (window.innerWidth < 768 && count > 30) count = 30; // Mobile cap
 
-        for (let i = 0; i < snowflakeCount; i++) {
+        for (let i = 0; i < count; i++) {
             snowflakes.push(new Snowflake());
         }
     }

@@ -74,31 +74,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // 🎬 Intro Screen - Click to enter
     // ─────────────────────────────────────────────────────────────
     elements.introOverlay.addEventListener('click', () => {
+        // Start background video immediately
+        elements.video.play().catch(e => console.log("Video play error:", e));
+
         // Fade out intro
         elements.introOverlay.style.opacity = '0';
+        elements.introOverlay.style.pointerEvents = 'none';
+
+        // Show main content immediately (fade in)
+        elements.mainContent.style.opacity = '1';
+        elements.mainContent.style.pointerEvents = 'auto';
 
         setTimeout(() => {
             elements.introOverlay.style.display = 'none';
-            elements.mainContent.style.opacity = '1';
-            elements.mainContent.style.pointerEvents = 'auto';
-
-            // Start background video
-            elements.video.play();
-
-            // Start music if autoplay is enabled
-            if (CONFIG.music.autoPlay) {
-                elements.music.volume = CONFIG.music.volume / 100;
-                elements.music.play()
-                    .then(() => {
-                        isPlaying = true;
-                        updatePlayPauseIcon();
-                    })
-                    .catch(err => console.log('Music autoplay blocked:', err));
-            }
-
-            // Start typewriter effect
-            startTypewriter();
         }, 1000);
+
+        // Start music if autoplay is enabled
+        if (CONFIG.music.autoPlay) {
+            elements.music.volume = CONFIG.music.volume / 100;
+            elements.music.play()
+                .then(() => {
+                    isPlaying = true;
+                    updatePlayPauseIcon();
+                })
+                .catch(err => console.log('Music autoplay blocked:', err));
+        }
+
+        // Start typewriter effect
+        startTypewriter();
     });
 
     // ─────────────────────────────────────────────────────────────

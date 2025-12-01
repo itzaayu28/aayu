@@ -74,9 +74,11 @@
 <body class="bg-black text-white h-screen w-screen overflow-hidden select-none">
 
     <div class="fixed inset-0 z-0">
-        <video id="bg-video" autoplay muted loop playsinline class="w-full h-full object-cover brightness-110">
+        <video id="bg-video" muted loop playsinline preload="metadata"
+            class="hidden md:block w-full h-full object-cover brightness-110">
             <source src="assets/background.mp4" type="video/mp4">
         </video>
+        <img src="assets/sc.png" alt="Background" class="block md:hidden w-full h-full object-cover brightness-110">
     </div>
 
     <!-- Falling Snow Canvas -->
