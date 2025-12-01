@@ -1,0 +1,379 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000;
+    color: white;
+    cursor: url('assets/cursor.webp'), auto;
+}
+
+/* Intro Overlay */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #050505;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+    cursor: pointer;
+}
+
+#intro-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.click-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    animation: pulse 2s infinite;
+    user-select: none;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.4;
+        transform: scale(0.98);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(0.98);
+    }
+}
+
+/* Main Content */
+#main-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: fill;
+    filter: brightness(0.4);
+    /* Darker for better contrast with glass elements */
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 1s ease 0.5s;
+}
+
+body.active .content-wrapper {
+    opacity: 1;
+}
+
+/* Mute Button */
+.glass-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.top-left {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* Profile Container */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    width: 90%;
+}
+
+/* Avatar Section */
+.avatar-section {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.main-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.avatar-decoration {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: #ffb6c1;
+    /* Light pink for cat ears */
+    text-shadow: 0 0 10px rgba(255, 182, 193, 0.8);
+    pointer-events: none;
+}
+
+.badges {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    backdrop-filter: blur(5px);
+}
+
+.status-text {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-weight: 300;
+}
+
+/* Glass Cards Row */
+.cards-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.glass-card {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.card-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card-info h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.card-info p,
+.stats-row span {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    display: block;
+}
+
+.stats-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.view-profile-btn {
+    background: #2ecc71;
+    border: none;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.view-profile-btn:hover {
+    background: #27ae60;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 20px;
+    font-size: 1.5rem;
+}
+
+.social-link {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-link:hover {
+    color: white;
+    transform: scale(1.2);
+}
+
+/* Meta Info */
+.meta-info {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    align-items: center;
+}
+
+.separator {
+    opacity: 0.3;
+}
+
+/* Music Player */
+.music-player {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.song-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.time-display {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background: white;
+    width: 0%;
+    border-radius: 2px;
+    position: relative;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.progress-container:hover .progress-bar::after {
+    opacity: 1;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 1.2rem;
+    align-items: center;
+}
+
+.controls i {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.controls i:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+#play-pause-btn {
+    font-size: 1.5rem;
+}
