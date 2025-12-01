@@ -136,77 +136,86 @@
                         <!-- Offline/Invisible Indicator -->
                         <div id="discord-status-indicator"
                             class="absolute bottom-0 right-0 w-4 h-4 bg-gray-800 rounded-full flex items-center justify-center border-2 border-gray-800">
-
-                            <!-- Second Card with Minecraft Avatar -->
-                            <div
-                                class="glass-panel rounded-2xl px-5 py-3 flex items-center gap-3 hover:-translate-y-1 transition-transform duration-300 w-[320px] h-[72px]">
-                                <img id="minecraft-avatar" src="assets/minecraft-avatar.png" alt="Minecraft"
-                                    class="w-12 h-12 rounded object-cover flex-shrink-0">
-                                <div class="font-minecraft flex-1 min-w-0">
-                                    <h3 id="minecraft-username" class="text-sm mb-0.5 font-bold truncate">pixuwa</h3>
-                                    <div id="minecraft-status"
-                                        class="flex items-center gap-2 text-[10px] text-green-400">
-                                        <span
-                                            class="w-2 h-2 bg-green-400 rounded-full animate-pulse flex-shrink-0"></span>
-                                        <span id="minecraft-status-text" class="truncate">Playing at Hypixel!!</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
                         </div>
-
-                        <div class="flex items-center justify-center gap-5 my-2 opacity-90 text-xl">
-                            <img src="assets/star-left.webp" alt="star"
-                                style="filter: drop-shadow(0 0 8px rgba(255,255,255,1)) drop-shadow(0 0 15px rgba(255,255,255,0.8)) drop-shadow(0 0 25px rgba(255,255,255,0.5));"
-                                class="w-10 h-10 object-contain animate-pulse-slow">
-                            <a id="discord-link" href="https://discord.com/users/1046088032920543312" target="_blank"
-                                class="text-white hover:scale-110 transition-all"
-                                style="filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));"><i
-                                    class="fa-brands fa-discord"></i></a>
-                            <a id="instagram-link" href="https://www.instagram.com/myk.rwt" target="_blank"
-                                class="text-white hover:scale-110 transition-all"
-                                style="filter: drop-shadow(0 0 8px rgba(255,255,255,1)) drop-shadow(0 0 15px rgba(255,255,255,0.8)) drop-shadow(0 0 25px rgba(255,255,255,0.5));"><i
-                                    class="fa-brands fa-instagram"></i></a>
-                            <img src="assets/star-right.webp" alt="star"
-                                style="filter: drop-shadow(0 0 8px rgba(255,255,255,1)) drop-shadow(0 0 15px rgba(255,255,255,0.8)) drop-shadow(0 0 25px rgba(255,255,255,0.5));"
-                                class="w-10 h-10 object-contain animate-pulse-slow">
-                        </div>
-
-                        <div class="flex items-center gap-3 text-[10px] text-white mb-2 font-minecraft">
-                            <span><i class="fa-solid fa-eye mr-1"></i> <span id="profile-views">13K</span></span>
-                            <span>|</span>
-                            <span><i class="fa-solid fa-location-dot mr-1"></i> <span
-                                    id="profile-location">India</span></span>
-                        </div>
-
-                        <div class="w-full max-w-lg">
-                            <div class="flex justify-between text-sm font-medium mb-2 font-minecraft">
-                                <span id="song-title">Depression...</span>
-                                <span id="time-display" class="text-white/60 text-xs font-minecraft">0:00 / 0:00</span>
-                            </div>
-
-                            <div id="progress-container"
-                                class="w-full h-1 bg-white/20 rounded-full cursor-pointer group mb-3">
-                                <div id="progress-bar" class="h-full bg-white rounded-full w-0 relative">
-                                    <div
-                                        class="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex justify-center items-center gap-6 text-lg">
-                                <button id="prev-btn"
-                                    class="text-white/70 hover:text-white hover:scale-110 transition-all"><i
-                                        class="fa-solid fa-backward-step"></i></button>
-                                <button id="play-pause-btn"
-                                    class="text-white hover:scale-110 transition-all text-2xl"><i
-                                        class="fa-solid fa-play"></i></button>
-                                <button id="next-btn"
-                                    class="text-white/70 hover:text-white hover:scale-110 transition-all"><i
-                                        class="fa-solid fa-forward-step"></i></button>
-                            </div>
-                        </div>
-
                     </div>
+                    <div class="font-minecraft flex-1 min-w-0">
+                        <div class="flex items-center gap-2 mb-1 flex-wrap">
+                            <h3 id="discord-username" class="text-sm font-bold whitespace-nowrap">myk.rwt</h3>
+                            <div id="discord-badges"
+                                class="bg-white/5 backdrop-blur-sm px-2 py-1 rounded-lg border border-white/10 inline-flex items-center gap-2">
+                                <img src="assets/2540_DiamondSword.png?v=3" class="w-4 h-4 flex-shrink-0" alt="Sword">
+                            </div>
+                        </div>
+                        <p id="discord-lastseen" class="text-[10px] text-white/60 italic truncate">last seen 7 hours ago
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Second Card with Minecraft Avatar -->
+                <div
+                    class="glass-panel rounded-2xl px-5 py-3 flex items-center gap-3 hover:-translate-y-1 transition-transform duration-300 w-[320px] h-[72px]">
+                    <img id="minecraft-avatar" src="assets/minecraft-avatar.png" alt="Minecraft"
+                        class="w-12 h-12 rounded object-cover flex-shrink-0">
+                    <div class="font-minecraft flex-1 min-w-0">
+                        <h3 id="minecraft-username" class="text-sm mb-0.5 font-bold truncate">pixuwa</h3>
+                        <div id="minecraft-status" class="flex items-center gap-0.5 text-[10px] text-green-400">
+                            <img src="assets/hypixel.png?v=3" class="w-5 h-5 object-contain flex-shrink-0 ml-[-5px]"
+                                alt="Hypixel">
+                            <span id="minecraft-status-text" class="truncate">Playing at Hypixel!!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center gap-5 my-2 opacity-90 text-xl">
+                <img src="assets/star-left.webp" alt="star"
+                    style="filter: drop-shadow(0 0 8px rgba(255,255,255,1)) drop-shadow(0 0 15px rgba(255,255,255,0.8)) drop-shadow(0 0 25px rgba(255,255,255,0.5));"
+                    class="w-10 h-10 object-contain animate-pulse-slow">
+                <a id="discord-link" href="https://discord.com/users/1046088032920543312" target="_blank"
+                    class="text-white hover:scale-110 transition-all"
+                    style="filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));"><i
+                        class="fa-brands fa-discord"></i></a>
+                <a id="instagram-link" href="https://www.instagram.com/myk.rwt" target="_blank"
+                    class="text-white hover:scale-110 transition-all"
+                    style="filter: drop-shadow(0 0 8px rgba(255,255,255,1)) drop-shadow(0 0 15px rgba(255,255,255,0.8)) drop-shadow(0 0 25px rgba(255,255,255,0.5));"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <img src="assets/star-right.webp" alt="star"
+                    style="filter: drop-shadow(0 0 8px rgba(255,255,255,1)) drop-shadow(0 0 15px rgba(255,255,255,0.8)) drop-shadow(0 0 25px rgba(255,255,255,0.5));"
+                    class="w-10 h-10 object-contain animate-pulse-slow">
+            </div>
+
+            <div class="flex items-center gap-3 text-[10px] text-white mb-2 font-minecraft">
+                <span><i class="fa-solid fa-eye mr-1"></i> <span id="profile-views">13K</span></span>
+                <span>|</span>
+                <span><i class="fa-solid fa-location-dot mr-1"></i> <span id="profile-location">India</span></span>
+            </div>
+
+            <div class="w-full max-w-lg">
+                <div class="flex justify-between text-sm font-medium mb-2 font-minecraft">
+                    <span id="song-title">Depression...</span>
+                    <span id="time-display" class="text-white/60 text-xs font-minecraft">0:00 / 0:00</span>
+                </div>
+
+                <div id="progress-container" class="w-full h-1 bg-white/20 rounded-full cursor-pointer group mb-3">
+                    <div id="progress-bar" class="h-full bg-white rounded-full w-0 relative">
+                        <div
+                            class="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center items-center gap-6 text-lg">
+                    <button id="prev-btn" class="text-white/70 hover:text-white hover:scale-110 transition-all"><i
+                            class="fa-solid fa-backward-step"></i></button>
+                    <button id="play-pause-btn" class="text-white hover:scale-110 transition-all text-2xl"><i
+                            class="fa-solid fa-play"></i></button>
+                    <button id="next-btn" class="text-white/70 hover:text-white hover:scale-110 transition-all"><i
+                            class="fa-solid fa-forward-step"></i></button>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <script src="config.js"></script>

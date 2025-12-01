@@ -47,17 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('discord-lastseen').textContent = CONFIG.discord.lastSeen;
 
         // Discord badges
-        const badgesContainer = document.getElementById('discord-badges');
-        badgesContainer.innerHTML = '';
-        if (CONFIG.discord.showNitro) {
-            badgesContainer.innerHTML += '<img src="assets/discordnitro.svg" class="w-3.5 h-3.5 flex-shrink-0" alt="Nitro">';
-        }
-        if (CONFIG.discord.showBugHunter) {
-            badgesContainer.innerHTML += '<img src="assets/discordbughunter1.svg" class="w-3.5 h-3.5 flex-shrink-0" alt="Bug Hunter">';
-        }
-        if (CONFIG.discord.showEarlySupporter) {
-            badgesContainer.innerHTML += '<img src="assets/discordearlysupporter.svg" class="w-3.5 h-3.5 flex-shrink-0" alt="Early Supporter">';
-        }
+        // Discord badges - Custom HTML is now used in index.html
+        // const badgesContainer = document.getElementById('discord-badges');
+        // badgesContainer.innerHTML = '';
+        // if (CONFIG.discord.showNitro) {
+        //     badgesContainer.innerHTML += '<img src="assets/discordnitro.svg" class="w-3.5 h-3.5 flex-shrink-0" alt="Nitro">';
+        // }
+        // if (CONFIG.discord.showBugHunter) {
+        //     badgesContainer.innerHTML += '<img src="assets/discordbughunter1.svg" class="w-3.5 h-3.5 flex-shrink-0" alt="Bug Hunter">';
+        // }
+        // if (CONFIG.discord.showEarlySupporter) {
+        //     badgesContainer.innerHTML += '<img src="assets/discordearlysupporter.svg" class="w-3.5 h-3.5 flex-shrink-0" alt="Early Supporter">';
+        // }
 
         // Discord status indicator
         const statusIndicator = document.getElementById('discord-status-indicator');
@@ -76,14 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('minecraft-status-text').textContent = CONFIG.minecraft.statusText;
 
         // Minecraft status
-        const mcStatus = document.getElementById('minecraft-status');
-        if (CONFIG.minecraft.isOnline) {
-            mcStatus.className = 'flex items-center gap-2 text-[10px] text-green-400';
-            mcStatus.innerHTML = '<span class="w-2 h-2 bg-green-400 rounded-full animate-pulse flex-shrink-0"></span><span id="minecraft-status-text" class="truncate">' + CONFIG.minecraft.statusText + '</span>';
-        } else {
-            mcStatus.className = 'flex items-center gap-2 text-[10px] text-gray-400';
-            mcStatus.innerHTML = '<span class="w-2 h-2 bg-gray-400 rounded-full flex-shrink-0"></span><span id="minecraft-status-text" class="truncate">' + CONFIG.minecraft.statusText + '</span>';
-        }
+        // Minecraft status - Custom HTML is now used in index.html
+        // const mcStatus = document.getElementById('minecraft-status');
+        // if (CONFIG.minecraft.isOnline) {
+        //     mcStatus.className = 'flex items-center gap-2 text-[10px] text-green-400';
+        //     mcStatus.innerHTML = '<span class="w-2 h-2 bg-green-400 rounded-full animate-pulse flex-shrink-0"></span><span id="minecraft-status-text" class="truncate">' + CONFIG.minecraft.statusText + '</span>';
+        // } else {
+        //     mcStatus.className = 'flex items-center gap-2 text-[10px] text-gray-400';
+        //     mcStatus.innerHTML = '<span class="w-2 h-2 bg-gray-400 rounded-full flex-shrink-0"></span><span id="minecraft-status-text" class="truncate">' + CONFIG.minecraft.statusText + '</span>';
+        // }
 
         // Social links
         document.getElementById('discord-link').href = CONFIG.social.discordLink;
@@ -127,16 +129,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // ─────────────────────────────────────────────────────────────
     // 🔊 Volume Control
     // ─────────────────────────────────────────────────────────────
+    let lastVolume = CONFIG.music.volume;
+
     elements.volumeSlider.addEventListener('input', (e) => {
         const volume = e.target.value / 100;
         elements.music.volume = volume;
         updateVolumeIcon(parseInt(e.target.value));
     });
 
+    elements.volumeIcon.addEventListener('click', () => {
+        if (elements.music.volume > 0) {
+            lastVolume = elements.volumeSlider.value;
+            elements.music.volume = 0;
+            elements.volumeSlider.value = 0;
+            updateVolumeIcon(0);
+        } else {
+            // Restore to last volume, or default to 70 if 0
+            let targetVol = lastVolume > 0 ? lastVolume : 70;
+            elements.music.volume = targetVol / 100;
+            elements.volumeSlider.value = targetVol;
+            updateVolumeIcon(targetVol);
+        }
+    });
+
     function updateVolumeIcon(volume) {
         elements.volumeIcon.classList.remove('fa-volume-high', 'fa-volume-low', 'fa-volume-xmark');
 
-        if (volume === 0) {
+        if (volume == 0) {
             elements.volumeIcon.classList.add('fa-volume-xmark');
         } else if (volume < 50) {
             elements.volumeIcon.classList.add('fa-volume-low');
@@ -146,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ─────────────────────────────────────────────────────────────
-    // ✍️ Typewriter Effect
+    // ✍️ Typewriter Effect (Bio)
     // ─────────────────────────────────────────────────────────────
     function startTypewriter() {
         const text = CONFIG.profile.bio;
@@ -180,6 +199,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         type();
     }
+
+    // ─────────────────────────────────────────────────────────────
+    // 🏷️ Title Typewriter Effect
+    // ─────────────────────────────────────────────────────────────
+    function startTitleTypewriter() {
+        const text = CONFIG.profile.username;
+        let index = 0;
+        let isDeleting = false;
+
+        function type() {
+            if (!isDeleting && index < text.length) {
+                // Typing forward
+                document.title = text.substring(0, index + 1);
+                index++;
+                setTimeout(type, 200); // Faster typing
+            }
+            else if (!isDeleting && index === text.length) {
+                // Pause at end
+                isDeleting = true;
+                setTimeout(type, 2000);
+            }
+            else if (isDeleting && index > 1) {
+                // Deleting backward - Stop at 1 char to avoid showing URL
+                document.title = text.substring(0, index - 1);
+                index--;
+                setTimeout(type, 100); // Faster deleting
+            }
+            else if (isDeleting && index <= 1) {
+                // Start over
+                isDeleting = false;
+                setTimeout(type, 500);
+            }
+        }
+
+        type();
+    }
+
+
 
     // ─────────────────────────────────────────────────────────────
     // 🎵 Music Player Functions
@@ -264,4 +321,5 @@ document.addEventListener('DOMContentLoaded', () => {
     loadConfig();  // Load all config values into HTML
     loadSong(currentSongIndex);
     updateVolumeIcon(CONFIG.music.volume);
+    startTitleTypewriter(); // Start title animation
 });
