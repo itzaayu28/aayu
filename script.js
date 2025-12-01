@@ -46,20 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('discord-avatar').src = CONFIG.discord.image;
         document.getElementById('discord-lastseen').textContent = CONFIG.discord.lastSeen;
 
-        // Discord badges
-        // Discord badges - Custom HTML is now used in index.html
-        // const badgesContainer = document.getElementById('discord-badges');
-        // badgesContainer.innerHTML = '';
-        // if (CONFIG.discord.showNitro) {
-        //     badgesContainer.innerHTML += '<img src="assets/discordnitro.svg" class="w-3.5 h-3.5 flex-shrink-0" alt="Nitro">';
-        // }
-        // if (CONFIG.discord.showBugHunter) {
-        //     badgesContainer.innerHTML += '<img src="assets/discordbughunter1.svg" class="w-3.5 h-3.5 flex-shrink-0" alt="Bug Hunter">';
-        // }
-        // if (CONFIG.discord.showEarlySupporter) {
-        //     badgesContainer.innerHTML += '<img src="assets/discordearlysupporter.svg" class="w-3.5 h-3.5 flex-shrink-0" alt="Early Supporter">';
-        // }
-
         // Discord status indicator
         const statusIndicator = document.getElementById('discord-status-indicator');
         const statusColors = {
@@ -75,17 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('minecraft-username').textContent = CONFIG.minecraft.username;
         document.getElementById('minecraft-avatar').src = CONFIG.minecraft.image;
         document.getElementById('minecraft-status-text').textContent = CONFIG.minecraft.statusText;
-
-        // Minecraft status
-        // Minecraft status - Custom HTML is now used in index.html
-        // const mcStatus = document.getElementById('minecraft-status');
-        // if (CONFIG.minecraft.isOnline) {
-        //     mcStatus.className = 'flex items-center gap-2 text-[10px] text-green-400';
-        //     mcStatus.innerHTML = '<span class="w-2 h-2 bg-green-400 rounded-full animate-pulse flex-shrink-0"></span><span id="minecraft-status-text" class="truncate">' + CONFIG.minecraft.statusText + '</span>';
-        // } else {
-        //     mcStatus.className = 'flex items-center gap-2 text-[10px] text-gray-400';
-        //     mcStatus.innerHTML = '<span class="w-2 h-2 bg-gray-400 rounded-full flex-shrink-0"></span><span id="minecraft-status-text" class="truncate">' + CONFIG.minecraft.statusText + '</span>';
-        // }
 
         // Social links
         document.getElementById('discord-link').href = CONFIG.social.discordLink;
@@ -178,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function type() {
             const currentText = texts[textIndex];
-            
+
             if (!isDeleting && charIndex < currentText.length) {
                 // Typing forward
                 elements.typewriter.textContent += currentText.charAt(charIndex);

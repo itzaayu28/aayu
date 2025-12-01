@@ -1,12 +1,10 @@
-// Falling Snow Effect - Emoji Snowflakes
+// Optimized Falling Snow Effect
 (function () {
     const canvas = document.getElementById('snow-canvas');
     const ctx = canvas.getContext('2d');
 
     let snowflakes = [];
     let animationId;
-    let windForce = 0;
-    let windTarget = 0;
 
     // Set canvas size
     function resizeCanvas() {
@@ -14,7 +12,7 @@
         canvas.height = window.innerHeight;
     }
 
-    // Lightweight snowflake class with emoji
+    // Optimized snowflake class
     class Snowflake {
         constructor() {
             this.reset();
@@ -23,86 +21,49 @@
         reset() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * -canvas.height;
-            this.size = Math.random() * 12 + 12; // Font size between 12-24px
-            this.speed = Math.random() * 0.3 + 0.4; // Consistent slower speed (0.4-0.7)
-            this.mass = this.size * 0.5;
-            this.wind = 0;
+            this.size = Math.random() * 10 + 10; // Font size 10-20px (smaller)
+            this.speed = Math.random() * 1.5 + 1; // Faster speed (1-2.5)
             this.opacity = Math.random() * 0.4 + 0.6; // 0.6-1
-            this.swing = Math.random() * 0.5 + 0.2; // Reduced swing (0.2-0.7)
-            this.swingSpeed = Math.random() * 0.008 + 0.004; // Slower swing
-            this.swingCounter = Math.random() * Math.PI * 2;
-            this.rotation = Math.random() * Math.PI * 2;
-            this.rotationSpeed = (Math.random() - 0.5) * 0.015; // Slower rotation
-            this.turbulence = Math.random() * 0.3; // Reduced turbulence
+            this.drift = (Math.random() - 0.5) * 0.5; // Gentle horizontal drift
         }
 
         update() {
-            // Wind
-            this.wind = windForce / this.mass;
-
-            // Simple turbulence (reduced)
-            const turbulenceX = Math.sin(this.y * 0.01 + this.turbulence * 10) * 0.15; // Reduced from 0.3
-
-            // Update position
+            // Simple vertical fall with gentle drift
             this.y += this.speed;
-            this.swingCounter += this.swingSpeed;
-            this.x += Math.sin(this.swingCounter) * this.swing + this.wind + turbulenceX;
-            this.rotation += this.rotationSpeed;
+            this.x += this.drift;
 
             // Reset if off screen
-            if (this.y > canvas.height + 30) {
+            if (this.y > canvas.height + 20) {
                 this.reset();
             }
 
-            if (this.x > canvas.width + 30) {
-                this.x = -30;
-            } else if (this.x < -30) {
-                this.x = canvas.width + 30;
+            if (this.x > canvas.width + 20) {
+                this.x = -20;
+            } else if (this.x < -20) {
+                this.x = canvas.width + 20;
             }
         }
 
         draw() {
             ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.rotation);
-
-            // Set font and opacity
             ctx.font = `${this.size}px Arial`;
             ctx.globalAlpha = this.opacity;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-
-            // Add subtle glow
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = `rgba(255, 255, 255, ${this.opacity * 0.5})`;
-
-            // Set white color for snowflake
             ctx.fillStyle = '#FFFFFF';
-
-            // Draw snowflake emoji
-            ctx.fillText('❄', 0, 0);
-
+            ctx.fillText('❄', this.x, this.y);
             ctx.restore();
         }
     }
 
-    // Initialize snowflakes
+    // Initialize snowflakes (reduced count)
     function initSnow() {
         snowflakes = [];
-        // Fewer snowflakes (reduced count)
-        const snowflakeCount = Math.floor((canvas.width * canvas.height) / 70000);
+        // Fewer snowflakes for better performance
+        const snowflakeCount = Math.floor((canvas.width * canvas.height) / 100000);
 
         for (let i = 0; i < snowflakeCount; i++) {
             snowflakes.push(new Snowflake());
-        }
-    }
-
-    // Update wind
-    function updateWind() {
-        windForce += (windTarget - windForce) * 0.02;
-
-        if (Math.random() < 0.01) {
-            windTarget = (Math.random() - 0.5) * 1; // Reduced wind strength
         }
     }
 
@@ -110,12 +71,10 @@
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        updateWind();
-
-        snowflakes.forEach(snowflake => {
-            snowflake.update();
-            snowflake.draw();
-        });
+        for (let i = 0; i < snowflakes.length; i++) {
+            snowflakes[i].update();
+            snowflakes[i].draw();
+        }
 
         animationId = requestAnimationFrame(animate);
     }
@@ -127,10 +86,14 @@
         animate();
     }
 
-    // Handle window resize
+    // Handle window resize (debounced)
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-        resizeCanvas();
-        initSnow();
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            resizeCanvas();
+            initSnow();
+        }, 250);
     });
 
     // Start snow when page loads
