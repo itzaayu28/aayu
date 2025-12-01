@@ -168,31 +168,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // ✍️ Typewriter Effect (Bio)
     // ─────────────────────────────────────────────────────────────
     function startTypewriter() {
-        const text = CONFIG.profile.bio;
-        let index = 0;
+        const texts = [
+            "Welcome to my Empire",
+            "Cooking hard because I can."
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
         let isDeleting = false;
 
         function type() {
-            if (!isDeleting && index < text.length) {
+            const currentText = texts[textIndex];
+            
+            if (!isDeleting && charIndex < currentText.length) {
                 // Typing forward
-                elements.typewriter.textContent += text.charAt(index);
-                index++;
+                elements.typewriter.textContent += currentText.charAt(charIndex);
+                charIndex++;
                 setTimeout(type, 100);
             }
-            else if (!isDeleting && index === text.length) {
+            else if (!isDeleting && charIndex === currentText.length) {
                 // Pause at end
                 isDeleting = true;
                 setTimeout(type, 2000);
             }
-            else if (isDeleting && index > 0) {
+            else if (isDeleting && charIndex > 0) {
                 // Deleting backward
-                elements.typewriter.textContent = text.substring(0, index - 1);
-                index--;
+                elements.typewriter.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
                 setTimeout(type, 50);
             }
-            else if (isDeleting && index === 0) {
-                // Start over
+            else if (isDeleting && charIndex === 0) {
+                // Move to next text
                 isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
                 setTimeout(type, 500);
             }
         }
