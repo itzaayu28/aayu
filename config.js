@@ -55,14 +55,15 @@ const CONFIG = {
         // Add your songs here
         playlist: [
             
+                    {
+                title: "Hollow...",
+                file: "assets/The Stranglers  Golden Brown.mp3"
+            },
             {
                 title: "Silence...",
                 file: "assets/weeknd_timelessxguitar.mp3"
-            },
-             {
-                title: "Silence...",
-                file: "assets/The Stranglers  Golden Brown.mp3"
             }
+
         ],
         volume: 70,                             // Default volume (0-100)
         autoPlay: true                          // Start playing automatically
