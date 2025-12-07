@@ -9,7 +9,7 @@ const CONFIG = {
     // ─────────────────────────────────────────────────────────────
     profile: {
         username: "aayu",                    // Your display name
-        bio: "Welcome to my Empire",            // Text that types out
+        bio: "Just A Random 16y/o",            // Text that types out
         location: "India",                      // Your location
         views: "13K",                           // View counter
         image: "assets/profile.jpg"             // Your profile picture
