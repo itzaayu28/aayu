@@ -58,7 +58,7 @@ const CONFIG = {
             {
                 title: "Silence...",
                 file: "assets/weeknd_timelessxguitar.mp3"
-            }
+            },
              {
                 title: "Silence...",
                 file: "assets/The Stranglers  Golden Brown.mp3"
