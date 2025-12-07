@@ -19,7 +19,7 @@ const CONFIG = {
     // 💬 DISCORD CARD
     // ─────────────────────────────────────────────────────────────
     discord: {
-        username: "lucifer1672",
+        username: "lucifer_1672",
         image: "assets/discord-avatar.jpg",
         lastSeen: "Watching Dms",
         status: "dnd",                      // online, idle, dnd, or offline
