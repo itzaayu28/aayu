@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startTypewriter() {
         const texts = [
             "Welcome to my realm",
-            "drifting where the light fades.."
+            "Just a random 16 y/0"
         ];
         let textIndex = 0;
         let charIndex = 0;
