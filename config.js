@@ -54,12 +54,9 @@ const CONFIG = {
     music: {
         // Add your songs here
         playlist: [
+            
             {
                 title: "Silence...",
-                file: "assets/The Stranglers Golden Brown.mp3"
-            },
-            {
-                title: "Timeless x Guitar",
                 file: "assets/weeknd_timelessxguitar.mp3"
             }
         ],
