@@ -8,7 +8,7 @@ const CONFIG = {
     // 👤 YOUR PROFILE
     // ─────────────────────────────────────────────────────────────
     profile: {
-        username: "myk.rwt",                    // Your display name
+        username: "aayu",                    // Your display name
         bio: "Welcome to my Empire",            // Text that types out
         location: "India",                      // Your location
         views: "13K",                           // View counter
@@ -19,10 +19,10 @@ const CONFIG = {
     // 💬 DISCORD CARD
     // ─────────────────────────────────────────────────────────────
     discord: {
-        username: "myk.rwt",
+        username: "lucifier1672",
         image: "assets/discord-avatar.jpg",
         lastSeen: "Watching Dms",
-        status: "online",                      // online, idle, dnd, or offline
+        status: "dnd",                      // online, idle, dnd, or offline
 
         // Discord badges (set to true/false)
         showNitro: true,
@@ -34,7 +34,7 @@ const CONFIG = {
     // 🎮 MINECRAFT CARD
     // ─────────────────────────────────────────────────────────────
     minecraft: {
-        username: "pixuwa",
+        username: "bhataakti.aatma",
         image: "assets/minecraft-avatar.png",
         isOnline: true,                         // true or false
         statusText: "Playing at Hypixel!!"
@@ -44,8 +44,8 @@ const CONFIG = {
     // 🔗 SOCIAL LINKS
     // ─────────────────────────────────────────────────────────────
     social: {
-        discordLink: "https://discord.com/users/1046088032920543312",
-        instagramLink: "https://www.instagram.com/myk.rwt"
+        discordLink: "https://discord.com/users/780448516069392415",
+        instagramLink: "https://www.instagram.com/uzuii0_0"
     },
 
     // ─────────────────────────────────────────────────────────────
