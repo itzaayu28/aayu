@@ -147,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ─────────────────────────────────────────────────────────────
     function startTypewriter() {
         const texts = [
-            "Welcome to my Empire",
-            "Cooking hard because I can."
+            "Into the dark you go.",
+            "the dark doesn’t scare me—it sharpens me.."
         ];
         let textIndex = 0;
         let charIndex = 0;
