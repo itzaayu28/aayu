@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startTypewriter() {
         const texts = [
             "Into the dark you go.",
-            "the dark doesn’t scare me—it sharpens me.."
+            "drifting where the light fades.."
         ];
         let textIndex = 0;
         let charIndex = 0;
